@@ -1,3 +1,4 @@
+import numpy as np
 import pandas as pd
 import tqdm
 import nltk
@@ -73,9 +74,33 @@ def preprocess_stream(stream_file, punctuation_dict, additional_stopwords=[], st
     plt.axis("off")
     if save_wordcloud:
         now = str(datetime.datetime.now()).replace(':', '').replace(' ', '_')[:9]
-        plt.savefig(f"twitter_wordcloud_{now}.png")
-        print(f"Saved wordcloud to twitter_wordcloud_{now}.png")
+        plt.savefig(f"outputs/twitter_wordcloud_{now}.png")
+        print(f"Saved wordcloud to outputs/twitter_wordcloud_{now}.png")
     else:
         plt.show()
 
     return tweets_list
+
+
+def average_vectors(tweets_list, model):
+    """
+    Function that creates embeddings for entire tweets by taking the element-wise mean of their constituent
+    tokens' embeddings.
+    Note: Tweets which are composed entirely of tokens absent from the Word2Vec model vocabulary are dropped and do
+    not appear in the output of this function. Therefore, the length of `average_vectors_list` may be lower than that
+    of `tweets_list`.
+    :param tweets_list: List of list of str-type tokens. Each sub-list corresponds to a single tokenized tweet.
+    :param model: Instance of your fit Word2Vec model.
+    :return: average_vectors_list: List of list of floats. Each sub-list is the vector corresponding to a single tweet.
+    """
+    average_vectors_list = []
+    for tweet in tweets_list:
+        tweet_vector = []
+        for token in tweet:
+            if token in model.wv:
+                tweet_vector.append(model.wv[token])
+        if len(tweet_vector) > 0:
+            tweet_vector = np.mean(tweet_vector, axis=0)
+            average_vectors_list.append(tweet_vector)
+
+    return average_vectors_list
