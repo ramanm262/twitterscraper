@@ -43,4 +43,5 @@ plt.xlabel("Number of clusters")
 plt.ylabel("Silhouette coefficient")
 plt.savefig("outputs/silhouette_scores.png")
 
-n_clusters = np.max(silhouette_coeffs)
+n_clusters = cluster_range[silhouette_coeffs.index(np.max(silhouette_coeffs))]
+
