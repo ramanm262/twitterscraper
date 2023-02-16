@@ -1,7 +1,5 @@
 import tweepy
-from tweepy import Stream
 from tweepy.streaming import Stream
-import numpy as np
 import time
 
 with open("resources/twitter_auth.txt") as twitter_auth:
