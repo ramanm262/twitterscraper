@@ -2,7 +2,6 @@ __pycache__
 *.py[cod]
 *$py.class
 /resources/twitter_auth.txt
-/resources/stream_output.txt
 /resources/sentiment140_data/*
 /resources/word2vec.model
 
