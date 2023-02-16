@@ -73,7 +73,7 @@ def preprocess_stream(stream_file, punctuation_dict, additional_stopwords=[], st
     plt.imshow(wordcloud)
     plt.axis("off")
     if save_wordcloud:
-        now = str(datetime.datetime.now()).replace(':', '').replace(' ', '_')[:9]
+        now = str(datetime.datetime.now()).replace(':', '').replace(' ', '_')[:10]
         plt.savefig(f"outputs/twitter_wordcloud_{now}.png")
         print(f"Saved wordcloud to outputs/twitter_wordcloud_{now}.png")
     else:
