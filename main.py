@@ -10,8 +10,8 @@ punctuation_dict = {',': ' ', ". ": ' ', "&": '', '"': '', '(': '', ')': '', 'â€
 additional_stopwords = ['like', "i'm", 'get', 'going', 'go']
 
 corpus = preprocess_stream(stream_file, punctuation_dict, additional_stopwords=additional_stopwords,
-                           stem_words=False, most_common=100)
-tweet_strings = [" ".join(tweet) for tweet in corpus]
+                           stem_words=False, most_common=10)
+raw_tweets = pd.read_csv(stream_file, delimiter=',', index_col=0, encoding='utf-8')["Text"]
 
 if mode == "training":
     print("Creating embeddings")
@@ -22,13 +22,12 @@ elif mode == "loading":
     model = Word2Vec.load("resources/word2vec.model")
 
 print("-"*8 + f"\nModel has a vocabulary size of {len(model.wv)}")
-# print(model.wv.most_similar("obama"))
 
 tweet_vectors = average_vectors(tweets_list=corpus, model=model)
 
 # Determine the best number of clusters to use
 n_clusters = optimum_n_clusters(tweet_vectors, cluster_range=range(3, 15), save_silhouette=True)
-# n_clusters = 10  # Or set it manually
+# n_clusters = 8  # Or set it manually
 
 # Instantiate and fit KMeans model
 km_model = KMeans(n_clusters=n_clusters, n_init="auto")
@@ -48,5 +47,5 @@ for cluster in range(n_clusters):
     print(f"\nCluster {cluster}:")
     exemplars = np.argsort(np.linalg.norm(tweet_vectors - km_model.cluster_centers_[cluster], axis=1))
     for exemplar in exemplars[:5]:
-        print(tweet_strings[exemplar])
+        print(raw_tweets[exemplar])
     print("-"*16)

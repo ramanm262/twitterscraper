@@ -102,5 +102,7 @@ def average_vectors(tweets_list, model):
         if len(tweet_vector) > 0:
             tweet_vector = np.mean(tweet_vector, axis=0)
             average_vectors_list.append(tweet_vector)
+        else:
+            average_vectors_list.append(np.zeros(model.wv.vector_size))
 
     return average_vectors_list
