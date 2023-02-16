@@ -94,7 +94,7 @@ def average_vectors(tweets_list, model):
     :return: average_vectors_list: List of list of floats. Each sub-list is the vector corresponding to a single tweet.
     """
     average_vectors_list = []
-    for tweet in tweets_list:
+    for tweet in tqdm.tqdm(tweets_list, desc="Averaging tokens vectors in each tweet"):
         tweet_vector = []
         for token in tweet:
             if token in model.wv:
