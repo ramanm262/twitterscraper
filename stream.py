@@ -52,4 +52,4 @@ print("Finished streaming.")
 
 with open('resources/stream_output.txt', 'w', encoding='utf8') as file:
     stream_size = file.read()
-print(f"Colllected {stream_size} bytes of tweets.")
+print(f"Collected {stream_size} bytes of tweets.")
