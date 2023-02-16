@@ -41,7 +41,7 @@ class Listener(Stream):
 
 output = open('resources/stream_output.txt', 'w', encoding='utf8')
 stream = Listener(output_file=output)
-# stream = Stream(auth=api.auth, listener=listener)
+
 stream_duration = 1.
 print(f"Started streaming for {stream_duration} seconds.")
 stream.sample(languages=['en'])
