@@ -39,6 +39,10 @@ You may wish to adjust some parameters in the script. If I haven't forgotten to 
 * Cluster the tweets in an unsupervised fashion with k-means
 * Show you the most representative words and tweets from each cluster
 
+### Dependencies
+
+numpy, pandas, tqdm, matplotlib, wordcloud, scikit-learn, nltk, gensim, tweepy
+
 ## An angry complaint
 
 As of February 9, 2023, Twitter is forcing everyone to pay for API access. Yeah, you can download a limited number of tweets per month, but the amount allowed is not actually very much! Especially considering that there are advanced data products that use millions of tweets per day for their analysis, or that there are developers who want to test their code more than a few times each month, the amount of data Twitter now has available is useless in many applications. I hope my code still words with the new API, if you decide you want to support it. At least it worked for the free one.
